@@ -1,0 +1,1 @@
+Clone Project, Flask im Pycharm installieren, fuer authenticationsql.py -> bcrypt package installieren, fue flask_session -> Terminal im Pucharm oeffnen-> pip (oder pip3) und command “pip install Flas-Session”
