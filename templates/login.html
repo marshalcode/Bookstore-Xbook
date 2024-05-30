@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Books</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            overflow: hidden;
+        }
+        .logo {
+            float: left;
+            font-size: 40px;
+            margin-top: 10px;
+        }
+        .button-group {
+            display: flex;
+            align-items: center;
+        }
+        .home-btn {
+            float: left;
+            background-color: white;
+            border: none;
+            color: white;
+            padding: 10px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .wishlist-btn {
+            float: right;
+            background-color: white;
+            border: none;
+            color: white;
+            padding: 0.2px 8px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .basket-btn {
+            float: right;
+            background-color: white;
+            border: none;
+            color: white;
+            padding: 0.2px 8px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .account-btn, .login-btn, .register-btn, .logout-btn {
+            float: right;
+            background-color: transparent;
+            border: none;
+            color: black;
+            padding: 20px 8px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        h2 {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 30px;
+        }
+        form {
+            width: 300px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 60px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: hsla(50, 33%, 25%, .75);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: brown;
+        }
+        .footer {
+           background-color: #333;
+           color: white;
+           padding: 20px;
+           text-align: center;
+        }
+        .footer .footer-top {
+            margin-bottom: 20px;
+        }
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .footer-column {
+            flex: 1;
+            min-width: 150px;
+        }
+        .footer-column h3 {
+            margin-bottom: 10px;
+        }
+        .footer-column a {
+            display: block;
+            color: white;
+            margin-bottom: 5px;
+        }
+        .footer .github-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        .footer .github-link img {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+        }
+        .footer .payment-icons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .footer .payment-icon img {
+            width: 40px;
+            height: auto;
+        }
+        .footer .payment-icon .creditcard {
+            width: 35px;
+        }
+        .footer .payment-icon .paypal {
+            width: 100px;
+        }
+        .footer .payment-icon .sepa {
+            width: 70px;
+        }
+        .footer .payment-icon .apple {
+            width: 70px;
+        }
+        .cookies-policy a, .terms-conditions a {
+            margin-top: 10px;
+            font-size: 14px;
+            color: white;
+        }
+    </style>
+    <script>
+        function viewBookDetails(isbn) {
+            window.location.href = '/book/' + isbn;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="home-btn">
+            <img src="/static/images/home-button.png" alt="Home">
+        </a>
+        <div class="logo">Xbook</div>
+        <div class="button-group">
+        </div>
+        <div class="button-group">
+             {% if user_id %}
+                <a href="/view_wishlist" class="wishlist-btn">
+                   <img src="/static/images/wishlist-1-32.png" alt="Wishlist">
+                </a>
+                <a href="/view_basket" class="basket-btn">
+                   <img src="/static/images/basket-30-32.png" alt="Basket">
+                </a>
+                <button class="account-btn" onclick="window.location.href='/account'">My Account</button>
+                <button class="logout-btn" onclick="window.location.href='/logout'">Logout</button>
+            {% else %}
+                <button class="login-btn" onclick="window.location.href='/login'">Sign in</button>
+                <button class="register-btn" onclick="window.location.href='/register'">Register</button>
+            {% endif %}
+        </div>
+    </div>
+    <main>
+        <h2>Login to Your Account</h2>
+    <form action="/login" method="post">
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email"><br>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password"><br><br>
+        <input type="submit" value="Login">
+    </form>
+    </main>
+    <footer class="footer">
+        <div class="footer-top">
+            <p>Xbook | 8 AM - 10 PM</p>
+            <p>Programming Exercises, supervised by Herrn Mevius</p>
+            <p>Frankfurt University of Applied Sciences</p>
+            <p>2024</p>
+        </div>
+<div class="footer-container">
+        <div class="footer-column">
+            <h3>Theo</h3>
+            <div class="github-link">
+                <img src="/static/images/github.png" alt="GitHub">
+                <a href="https://github.com/2Theo22/Bookstore" target="_blank">GitHub</a>
+            </div>
+            <a href="mailto:22theo.a.22@gmail.com">Email</a>
+        </div>
+        <div class="footer-column">
+            <h3>Iryna Vynarchuk</h3>
+            <div class="github-link">
+                <img src="/static/images/github.png" alt="GitHub">
+                <a href="https://github.com/marshalcode/Bookstore-xbook" target="_blank">GitHub</a>
+            </div>
+            <a href="mailto:iryna.vynarchuk@gmail.com">Email</a>
+        </div>
+        <div class="footer-column">
+            <h3>About Us</h3>
+            <p>Xbook is your go-to place for the best books in various genres. We believe in the power of reading and its ability to feed the soul.</p>
+        </div>
+        <div class="footer-column">
+            <h3>Navigation</h3>
+            <a href="/account">Account</a>
+            <a href="/view_basket">Basket</a>
+            <a href="/view_wishlist">Wishlist</a>
+            <a href="/books">Books</a>
+            <a href="/">Home</a>
+        </div>
+    </div>
+    <div class="payment-icons">
+        <div class="payment-icon">
+            <img src="/static/images/credit.png" alt="Creditcard" class="creditcard">
+        </div>
+        <div class="payment-icon">
+            <img src="/static/images/paypal.png" alt="PayPal" class="paypal">
+        </div>
+        <div class="payment-icon">
+            <img src="/static/images/sepa.png" alt="SEPA" class="sepa">
+        </div>
+        <div class="payment-icon">
+            <img src="/static/images/apple.png" alt="Apple Pay" class="apple">
+        </div>
+    </div>
+    <div class="cookies-policy">
+        <a href="/cookies-policy">Cookies Policy</a>
+    </div>
+    <div class="terms-conditions">
+        <a href="/terms-conditions">Terms & Conditions</a>
+    </div>
+</footer>
+</body>
+</html>
+

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .logo {
+            float: left;
+            font-size: 30px;
+            margin-top: 10px;
+        }
+        .container {
+            position: relative;
+            max-width: 100%;
+            margin: 0 auto;
+            height: auto;
+        }
+        h2 {
+            text-align: center;
+        }
+        h3 {
+            text-align: left;
+        }
+        .back-btn {
+            float: right;
+            background-color: hsla(50, 33%, 25%, .75);
+            border: none;
+            color: white;
+            padding: 10px 28px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .user-details, .order-details, .address {
+            margin-bottom: 20px;
+        }
+        .user-img, .order-img {
+            width: 32px;
+            height: 32px;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+        .order-item {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .details-container {
+            display: flex;
+            align-items: center;
+        }
+         .sidebar {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .sidebar img {
+            width: 300px;
+            max-height: 500px;
+            height: auto;
+        }
+        .main-content {
+            flex: 3;
+        }
+        .logout-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .logout-btn:hover {
+            background-color: #45a049;
+        }
+        .cover-image {
+            width: 100px;
+            height: 150px;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">Xbook</div>
+        <h2>My Account</h2>
+        <div class="main-content">
+            <button class="back-btn" onclick="window.location.href='/'">Search books</button>
+            <h3>Welcome to your private corner of Xbook. You can see your orders, returns and account info right here.</h3>
+            <div class="user-details">
+                <h3>Personal details:</h3>
+                <div class="details-container">
+                    <div>
+                        <p><strong>Email:</strong> {{ user.email }}</p>
+                        <p><strong>Name:</strong> {{ user.name }} </p>
+                        <p><strong>Surname:</strong> {{ user.surname }} </p>
+                    </div>
+                </div>
+            </div>
+            <div class="address">
+                <h3>Your address:</h3>
+                <div class="details-container">
+                    <div>
+                        <p><strong>City:</strong> {{ user.city }}</p>
+                        <p><strong>Zip code:</strong> {{ user.zip_id }}</p>
+                        <p><strong>Street:</strong> {{ user.street }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar">
+               <img src="/static/images/account.png" alt="User Image" class="user-img">
+            </div>
+            <div class="order-details">
+                <h3>Your Orders:</h3>
+                <img src="/static/images/order-68-32.png" alt="User Image" class="user-img">
+                {% if user.orders %}
+                    {% for order in user.orders %}
+                        <div class="order-item">
+                           <div class="details-container">
+                                <img src="{{ order.cover_image }}" alt="Cover Image" class="cover-image">
+                                <div>
+                                    <p><strong>Title: {{ order.title }}</strong> </p>
+                                    <p>ISBN: {{ order.isbn }}</p>
+                                    <p>Order ID: {{ order.order_id }}</p>
+                                    <p>Date: {{ order.date }}</p>
+                                    <p>Total Price: {{ order.total_price }}</p>
+                                    <p>Status: {{ order.status }}</p>
+                                </div>
+                           </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No orders found.</p>
+                {% endif %}
+            </div>
+        </div>
+        <button onclick="window.location.href='/logout'" class="logout-btn">Logout</button>
+    </div>
+</body>
+</html>
+
+
+

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            overflow: hidden;
+        }
+        .search-form {
+            display: inline-block;
+            margin-right: 5px;
+            margin-left: 5px;
+        }
+        .search-form input[type="text"] {
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 250px;
+        }
+        .search-form button {
+            padding: 15px 20px;
+            border-radius: 5px;
+            background-color: hsla(50, 33%, 25%, .75);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        .search-form button:hover {
+            background-color: brown;
+        }
+        .all-books-btn {
+            padding: 15px 20px;
+            border-radius: 5px;
+            background-color: hsla(50, 33%, 25%, .75);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        .all-books-btn:hover {
+            background-color: brown;
+        }
+        .logo {
+            float: left;
+            font-size: 40px;
+            margin-top: 10px;
+        }
+        .button-group {
+            display: flex;
+            align-items: center;
+        }
+        .home-btn {
+            float: left;
+            background-color: white;
+            border: none;
+            color: white;
+            padding: 10px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .wishlist-btn {
+            float: right;
+            background-color: white;
+            border: none;
+            color: white;
+            padding: 0.2px 8px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .basket-btn {
+            float: right;
+            background-color: white;
+            border: none;
+            color: white;
+            padding: 0.2px 8px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .account-btn, .login-btn, .register-btn, .logout-btn {
+            float: right;
+            background-color: transparent;
+            border: none;
+            color: black;
+            padding: 20px 8px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .payment {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .payment form {
+            width: 300px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 60px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .payment-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 290px;
+            height: 60px;
+            margin: 10px auto;
+            padding: 10px;
+            font-size: 14px;
+            color: white;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .payment-button img {
+            margin-right: 10px;
+        }
+        .paypal-btn {
+            background-color: #FFC439;
+        }
+        .sepa-btn {
+            background-color: #EFEFEF;
+            color: #333;
+        }
+        .giropay-btn {
+            background-color: #EFEFEF;
+        }
+        .creditcard-btn {
+            background-color: #333;
+        }
+        .paypal-icon {
+            width: 120px;
+            height: 110px;
+        }
+        .sepa-icon {
+            width: 80px;
+            height: 70px;
+        }
+        .giropay-icon {
+            width: 110px;
+            height: 70px;
+        }
+        .creditcard-icon {
+            width: 28px;
+            height: 28px;
+        }
+            h2 {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 30px;
+        }
+        .total-price {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="home-btn">
+            <img src="/static/images/home-button.png" alt="Home">
+        </a>
+        <div class="logo">Xbook</div>
+        <div class="button-group">
+             <button class="all-books-btn" onclick="window.location.href='/books'">All books</button>
+             <form class="search-form" action="/search" method="post">
+                  <input type="text" name="search_query" placeholder="Search books...Keyword, ISBN, Title, Autor">
+                  <button type="submit">Search</button>
+             </form>
+        </div>
+        <div class="button-group">
+             {% if user_id %}
+                <a href="/view_wishlist" class="wishlist-btn">
+                   <img src="/static/images/wishlist-1-32.png" alt="Wishlist">
+                </a>
+                <a href="/view_basket" class="basket-btn">
+                   <img src="/static/images/basket-30-32.png" alt="Basket">
+                </a>
+                <button class="account-btn" onclick="window.location.href='/account'">My Account</button>
+                <button class="logout-btn" onclick="window.location.href='/logout'">Logout</button>
+            {% else %}
+                <button class="login-btn" onclick="window.location.href='/login'">Sign in</button>
+                <button class="register-btn" onclick="window.location.href='/register'">Register</button>
+            {% endif %}
+        </div>
+    </div>
+    <main class="payment">
+        <h1>Payment</h1>
+        <div class="total-price">
+            Total Price: €{{ total_price }}
+        </div>
+        <form action="/process_payment" method="post">
+            <button type="submit" name="payment_method" value="paypal" class="payment-button paypal-btn">
+                <img src="/static/images/paypal.png" alt="PayPal" class="paypal-icon">
+            </button>
+            <button type="submit" name="payment_method" value="sepa" class="payment-button sepa-btn">
+                <img src="/static/images/sepa.png" alt="SEPA" class="sepa-icon">
+            </button>
+            <button type="submit" name="payment_method" value="giropay" class="payment-button giropay-btn">
+                <img src="/static/images/apple.png" alt="Giropay" class="giropay-icon">
+            </button>
+            <button type="submit" name="payment_method" value="creditcard" class="payment-button creditcard-btn">
+                <img src="/static/images/credit.png" alt="Credit Card" class="creditcard-icon"> Debit or Credit Card
+            </button>
+        </form>
+    </main>
+    <footer>
+    </footer>
+</body>
+</html>

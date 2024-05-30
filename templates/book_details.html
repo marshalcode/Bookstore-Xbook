@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details</title>
+    <style>
+         body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            overflow: hidden;
+        }
+        .search-form {
+            display: inline-block;
+            margin-right: 5px;
+            margin-left: 5px;
+        }
+        .search-form input[type="text"] {
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 250px;
+        }
+        .search-form button {
+            padding: 15px 20px;
+            border-radius: 5px;
+            background-color: hsla(50, 33%, 25%, .75);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        .search-form button:hover {
+            background-color: brown;
+        }
+        .all-books-btn {
+            padding: 15px 20px;
+            border-radius: 5px;
+            background-color: hsla(50, 33%, 25%, .75);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        .all-books-btn:hover {
+            background-color: brown;
+        }
+        .logo {
+            float: left;
+            font-size: 40px;
+            margin-top: 10px;
+        }
+        .button-group {
+            display: flex;
+            align-items: center;
+        }
+        .home-btn {
+            float: left;
+            background-color: white;
+            border: none;
+            color: white;
+            padding: 10px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .wishlist-btn {
+            float: right;
+            background-color: white;
+            border: none;
+            color: white;
+            padding: 0.2px 8px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .basket-btn {
+            float: right;
+            background-color: white;
+            border: none;
+            color: white;
+            padding: 0.2px 8px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .account-btn, .login-btn, .register-btn, .logout-btn {
+            float: right;
+            background-color: transparent;
+            border: none;
+            color: black;
+            padding: 20px 8px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        main {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+        .book-details {
+            display: flex;
+            align-items: flex-start;
+            border: 1px solid #ddd;
+            padding: 40px;
+            background-color: white;
+            max-width: 800px;
+            width: 100%;
+            margin: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .book-details img {
+            max-width: 300px;
+            border-radius: 10px;
+            margin-right: 20px;
+        }
+        .book-info {
+            max-width: 100%;
+        }
+        .book-info h1 {
+            font-size: 24px;
+            margin: 0;
+            font-weight: bold;
+        }
+        .book-info h2 {
+            font-size: 18px;
+            margin: 10px 0;
+            font-weight: normal;
+            color: #555;
+        }
+        .book-info .price {
+            font-size: 17px;
+            color: brown;
+            margin: 10px 0;
+        }
+        .book-info .description {
+            margin: 20px 0;
+            text-align: justify;
+            color: #333;
+        }
+        .book-info .info {
+            margin-top: 10px;
+        }
+        .book-info .info p {
+            margin: 5px 0;
+        }
+        .book-info .info strong {
+            display: inline-block;
+            width: 120px;
+            color: #333;
+        }
+        .book-info form {
+            margin: 10px 0;
+        }
+        .book-info form button {
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: hsla(50, 33%, 25%, .75);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        .book-info form button:hover {
+            background-color: brown;
+        }
+        .wishlist-btn-top {
+           position: absolute;
+           background: transparent;
+           border: none;
+           cursor: pointer;
+           float: right;
+        }
+        .wishlist-btn-top img {
+           width: 32px;
+           height: 32px;
+        }
+        .footer {
+           background-color: #333;
+           color: white;
+           padding: 20px;
+           text-align: center;
+        }
+        .footer .footer-top {
+            margin-bottom: 20px;
+        }
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .footer-column {
+            flex: 1;
+            min-width: 150px;
+        }
+        .footer-column h3 {
+            margin-bottom: 10px;
+        }
+        .footer-column a {
+            display: block;
+            color: white;
+            margin-bottom: 5px;
+        }
+        .footer .github-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        .footer .github-link img {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+        }
+        .footer .payment-icons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .footer .payment-icon img {
+            width: 40px;
+            height: auto;
+        }
+        .footer .payment-icon .creditcard {
+            width: 35px;
+        }
+        .footer .payment-icon .paypal {
+            width: 100px;
+        }
+        .footer .payment-icon .sepa {
+            width: 70px;
+        }
+        .footer .payment-icon .apple {
+            width: 70px;
+        }
+        .cookies-policy a, .terms-conditions a {
+            margin-top: 10px;
+            font-size: 14px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="home-btn">
+            <img src="/static/images/home-button.png" alt="Home">
+        </a>
+        <div class="logo">Xbook</div>
+        <div class="button-group">
+             <button class="all-books-btn" onclick="window.location.href='/books'">All books</button>
+             <form class="search-form" action="/search" method="post">
+                  <input type="text" name="search_query" placeholder="Search books...Keyword, ISBN, Title, Autor">
+                  <button type="submit">Search</button>
+             </form>
+        </div>
+        <div class="button-group">
+             {% if user_id %}
+                <a href="/view_wishlist" class="wishlist-btn">
+                   <img src="/static/images/wishlist-1-32.png" alt="Wishlist">
+                </a>
+                <a href="/view_basket" class="basket-btn">
+                   <img src="/static/images/basket-30-32.png" alt="Basket">
+                </a>
+                <button class="account-btn" onclick="window.location.href='/account'">My Account</button>
+                <button class="logout-btn" onclick="window.location.href='/logout'">Logout</button>
+            {% else %}
+                <button class="login-btn" onclick="window.location.href='/login'">Sign in</button>
+                <button class="register-btn" onclick="window.location.href='/register'">Register</button>
+            {% endif %}
+        </div>
+    </div>
+<main>
+        <div class="book-details">
+            <img src="{{ book[5] }}" alt="Book Image">
+            <div class="book-info">
+                <h1>{{ book[1] }}</h1>
+                <h2>by {{ book[2] }}</h2>
+                <div class="price">{{ book[8] }} EUR</div>
+                <div class="description">
+                    <strong>Description:</strong> {{ book[3] }}
+                </div>
+                <div class="info">
+                    <p>ISBN: {{ book[0] }}</p>
+                    <p>Publisher: {{ book[9] }}</p>
+                    <p>Genre: {{ book[4] }}</p>
+                    <p>Pages: {{ book[7] }}</p>
+                    <p>Language: {{ book[11] }}</p>
+                    <p>Year: {{ book[12] }}</p>
+                    <p>Keywords: {{ book[6] }}</p>
+                    <p>
+                        {% if book[10] < 1 %}
+                            Out of stock
+                        {% else %}
+                            Available in stock
+                        {% endif %}
+                    </p>
+                </div>
+                <form action="/add_to_basket" method="post">
+                    <input type="hidden" name="isbn" value="{{ book[0] }}">
+                    <button type="submit">Add to Basket</button>
+                </form>
+                <button class="wishlist-btn-top" onclick="document.getElementById('wishlist-form').submit()">
+                      <img src="/static/images/wishlist-1-32.png" alt="Add to Wishlist">
+                </button>
+                <form id="wishlist-form" action="/add_to_wishlist" method="post">
+                    <input type="hidden" name="isbn" value="{{ book[0] }}">
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="footer-top">
+            <p>Xbook | 8 AM - 10 PM</p>
+            <p>Programming Exercises, supervised by Herrn Mevius</p>
+            <p>Frankfurt University of Applied Sciences</p>
+            <p>2024</p>
+        </div>
+<div class="footer-container">
+        <div class="footer-column">
+            <h3>Theo</h3>
+            <div class="github-link">
+                <img src="/static/images/github.png" alt="GitHub">
+                <a href="https://github.com/2Theo22/Bookstore" target="_blank">GitHub</a>
+            </div>
+            <a href="mailto:22theo.a.22@gmail.com">Email</a>
+        </div>
+        <div class="footer-column">
+            <h3>Iryna Vynarchuk</h3>
+            <div class="github-link">
+                <img src="/static/images/github.png" alt="GitHub">
+                <a href="https://github.com/marshalcode/Bookstore-xbook" target="_blank">GitHub</a>
+            </div>
+            <a href="mailto:iryna.vynarchuk@gmail.com">Email</a>
+        </div>
+        <div class="footer-column">
+            <h3>About Us</h3>
+            <p>Xbook is your go-to place for the best books in various genres. We believe in the power of reading and its ability to feed the soul.</p>
+        </div>
+        <div class="footer-column">
+            <h3>Navigation</h3>
+            <a href="/account">Account</a>
+            <a href="/view_basket">Basket</a>
+            <a href="/view_wishlist">Wishlist</a>
+            <a href="/books">Books</a>
+            <a href="/">Home</a>
+        </div>
+    </div>
+    <div class="payment-icons">
+        <div class="payment-icon">
+            <img src="/static/images/credit.png" alt="Creditcard" class="creditcard">
+        </div>
+        <div class="payment-icon">
+            <img src="/static/images/paypal.png" alt="PayPal" class="paypal">
+        </div>
+        <div class="payment-icon">
+            <img src="/static/images/sepa.png" alt="SEPA" class="sepa">
+        </div>
+        <div class="payment-icon">
+            <img src="/static/images/apple.png" alt="Apple Pay" class="apple">
+        </div>
+    </div>
+    <div class="cookies-policy">
+        <a href="/cookies-policy">Cookies Policy</a>
+    </div>
+    <div class="terms-conditions">
+        <a href="/terms-conditions">Terms & Conditions</a>
+    </div>
+</footer>
+</body>
+</html>

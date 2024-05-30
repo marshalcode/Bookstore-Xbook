@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Orders</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+        }
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            background-color: white;
+        }
+        .logo {
+            font-size: 40px;
+        }
+        .button-group {
+            display: flex;
+            align-items: center;
+        }
+        .orders-table-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: top;
+        }
+        .orders-table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .orders-table th {
+            border: 1px solid #ddd;
+            padding: 8px;
+            color: white;
+        }
+        .orders-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        .orders-table th {
+            background-color: black;
+        }
+        .shipped {
+            background-color: green;
+            color: white;
+        }
+        .paid {
+            background-color: red;
+            color: white;
+        }
+        .received {
+            background-color: blue;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="home-btn">
+            <h1>Root Admin</h1>
+            <img src="/static/images/home-button.png" alt="Home">
+        </a>
+        <div class="logo">Xbook</div>
+    </div>
+    <div class="orders-table-container">
+        <table class="orders-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Order ID</th>
+                    <th>Customer ID</th>
+                    <th>Total Price</th>
+                     <th>Status</th>
+                </tr>
+            </thead>
+           <tbody>
+             {% for order in orders %}
+               <tr class="orders-color">
+               <td>{{ order.Date }}</td>
+               <td>{{ order.OrderID }}</td>
+               <td>{{ order.KDNR_ID }}</td>
+               <td>{{ order.Total_price }}</td>
+               <td class="order-status {% if order.Status == 'Shipped' %}shipped{% elif order.Status == 'Paid' %}paid{% elif order.Status == 'Received' %}received{% endif %}">
+                 {{ order.Status }}
+               </td>
+             </tr>
+           {% endfor %}
+           </tbody>
+        </table>
+    </div>
+</body>
+</html>

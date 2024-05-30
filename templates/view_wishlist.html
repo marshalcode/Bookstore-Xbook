@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist</title>
+    <style>
+         body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            overflow: hidden;
+        }
+        .search-form {
+            display: inline-block;
+            margin-right: 5px;
+            margin-left: 5px;
+        }
+        .search-form input[type="text"] {
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 250px;
+        }
+        .search-form button {
+            padding: 15px 20px;
+            border-radius: 5px;
+            background-color: hsla(50, 33%, 25%, .75);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        .search-form button:hover {
+            background-color: brown;
+        }
+        .all-books-btn {
+            padding: 15px 20px;
+            border-radius: 5px;
+            background-color: hsla(50, 33%, 25%, .75);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        .all-books-btn:hover {
+            background-color: brown;
+        }
+        .logo {
+            float: left;
+            font-size: 40px;
+            margin-top: 10px;
+        }
+        .button-group {
+            display: flex;
+            align-items: center;
+        }
+        .home-btn {
+            float: left;
+            background-color: white;
+            border: none;
+            color: white;
+            padding: 10px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .wishlist-btn {
+            float: right;
+            background-color: white;
+            border: none;
+            color: white;
+            padding: 0.2px 8px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .basket-btn {
+            float: right;
+            background-color: white;
+            border: none;
+            color: white;
+            padding: 0.2px 8px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .account-btn, .login-btn, .register-btn, .logout-btn {
+            float: right;
+            background-color: transparent;
+            border: none;
+            color: black;
+            padding: 20px 8px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .wishlist {
+            margin-top: 20px;
+        }
+        .book {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .book img {
+            max-width: 100px;
+            max-height: 150px;
+            float: left;
+            margin-right: 10px;
+        }
+        .book form {
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .book button {
+            background-color: #556B2F;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .book button:hover{
+            background-color: brown;
+        }
+        .book .remove-btn {
+            background-color: black;
+        }
+        .price {
+            font-size: 17px;
+            color: brown;
+            margin: 10px 0;
+        }
+        .intro-image {
+            display: block;
+            width: 30%;
+            height: 30%;
+            margin-left: 35%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="home-btn">
+            <img src="/static/images/home-button.png" alt="Home">
+        </a>
+        <div class="logo">Xbook</div>
+        <div class="button-group">
+             <button class="all-books-btn" onclick="window.location.href='/books'">All books</button>
+             <form class="search-form" action="/search" method="post">
+                  <input type="text" name="search_query" placeholder="Search books...Keyword, ISBN, Title, Autor">
+                  <button type="submit">Search</button>
+             </form>
+        </div>
+        <div class="button-group">
+             {% if user_id %}
+                <a href="/view_wishlist" class="wishlist-btn">
+                   <img src="/static/images/wishlist-1-32.png" alt="Wishlist">
+                </a>
+                <a href="/view_basket" class="basket-btn">
+                   <img src="/static/images/basket-30-32.png" alt="Basket">
+                </a>
+                <button class="account-btn" onclick="window.location.href='/account'">My Account</button>
+                <button class="logout-btn" onclick="window.location.href='/logout'">Logout</button>
+            {% else %}
+                <button class="login-btn" onclick="window.location.href='/login'">Sign in</button>
+                <button class="register-btn" onclick="window.location.href='/register'">Register</button>
+            {% endif %}
+        </div>
+    </div>
+    <main class="wishlist">
+        <h1>Your Wishlist</h1>
+        {% if books %}
+            {% for book in books %}
+                <div class="book">
+                    <img src="{{ book[3] }}" alt="Book Image">
+                    <strong> {{ book[1] }}</strong><br>
+                    <p>by {{ book[2] }}</p>
+                    <div class="price">{{ book[4] }} EUR</div>
+                    <p>
+                        {% if book[5] < 1 %}
+                            Out of stock
+                        {% else %}
+                            Available in stock
+                        {% endif %}
+                    </p>
+                    <form action="/remove_from_wishlist" method="post">
+                        <input type="hidden" name="isbn" value="{{ book[0] }}">
+                        <button type="submit" class="remove-btn">Remove from Wishlist</button>
+                    </form>
+                    <form action="/move_to_basket" method="post">
+                        <input type="hidden" name="isbn" value="{{ book[0] }}">
+                        <button type="submit">Add to Basket</button>
+                    </form>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Your wishlist is empty.</p>
+        {% endif %}
+    </main>
+    <footer>
+      <img src="https://www.southernliving.com/thmb/ZY8yg3J65pJPh0X_wI1gncy0f3w=/750x0/filters:no_upscale():max_bytes(150000):strip_icc()/gettyimages-183822187-1-709a5ded972a426a9e214eba1f81c8a4.jpg" alt="Intro Image" class="intro-image">
+    </footer>
+</body>
+</html>
